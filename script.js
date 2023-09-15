@@ -29,7 +29,7 @@ const drawBoard = (function(){
 
 
 
-
+//Factory function for creating player object.
 function createPlayer(playerName, playerMarker){
     const playerHolder = {};
 
@@ -50,6 +50,8 @@ function createPlayer(playerName, playerMarker){
     return playerHolder;
 }
 
+
+//Controls the display of the values, and the population of the empty array
 let displayControll = (function(){
     //event delegation to parent container
     gameContainer.addEventListener(`click`, function(event){
@@ -57,22 +59,25 @@ let displayControll = (function(){
             let row = event.target.dataset.row;
             let column = event.target.dataset.column;
             let changeDisp = document.querySelector(`[data-row = "${row}"][data-column = "${column}"]`);
-            console.log(emptyBoard[row][column]);
+            //console.log(emptyBoard[row][column]);
         if(emptyBoard[row][column] === ` ` || emptyBoard[row][column] == undefined && player1.playerState == 1){
             emptyBoard[row][column] = `X`;
             player1[`playerState`] = 0;
             player2[`playerState`] = 1;
-            changeDisp.textContent = `X`
+            changeDisp.textContent = `X`;
+            gameController.checkwinner();
         } else if(emptyBoard[row][column] === ` ` || emptyBoard[row][column] == undefined && player2.playerState == 1){
             emptyBoard[row][column] = `0`;
             player2[`playerState`] = 0;
             player1[`playerState`] = 1;
             changeDisp.textContent = `0`;
+            gameController.checkwinner();
         }
     }
     })
 })();
 
+//controls the game flow and declares a winner 
 let gameController = function(){
 
     function checkRowWin(marker){
@@ -93,11 +98,28 @@ let gameController = function(){
         }
     }
    return false;
-}
+    }
+
+   function checkDiagL(marker){
+    if(emptyBoard[0][0] == marker && emptyBoard[1][1] == marker && emptyBoard[2][2] == marker){
+        return true;
+        }
+    return false;
+    } 
 
 
-const player1Wins = checkRowWin(`X`) || checkColumnWint(`X`);
-const player2Wins = checkRowWin(`0`) || checkColumnWint(`0`);
+    function checkDiagR(marker){
+        if(emptyBoard[0][2] == marker && emptyBoard[1][1] == marker && emptyBoard[2][0] == marker){
+            return true;
+        }
+
+    return false;
+    }
+
+function checkwinner(){
+
+const player1Wins = checkRowWin(`X`) || checkColumnWint(`X`) || checkDiagL(`X`) || checkDiagR(`X`);
+const player2Wins = checkRowWin(`0`) || checkColumnWint(`0`) || checkDiagL(`0`) || checkDiagR(`0`);
 
 if(player1Wins){
     console.log(`Player 1 wins`);
@@ -107,6 +129,11 @@ if(player1Wins){
     console.log(`no winner yet`);
 }
 
+}
+
+return{
+    checkwinner
+}
 
 }();
 
