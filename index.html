@@ -9,16 +9,43 @@
 </head>
 <body>
     <header>Tic Tac Toe</header>
-    <div id="information">
-        <form>
-            <label for ="player1">Player 1 name: </label>
-            <input type="text" id="player1" name="player1"><br><br>
 
-        </form>
+    <div class="formWrapper">
+        <div id="information">
+            <form>
+                <div class="row">
+                    <label for ="player1">Player 1 name: </label>
+                    <input type="text" id="player1" name="player1">
+                </div>
+            <p>Choose your Weapon</p>
+            
+                <div class="row">
+                    <input type="radio" id="X" name="plChoice" value="X">
+                    <label for="X">X</label>
+                </div>
+
+                <div class="row">
+                    <input type="radio" id="O" name="plChoice" value="0">
+                    <label for="O"> 0 </label>
+                </div>
+
+                <div class="row">
+                    <input type="submit" id="sbBt" name="subDeets">
+                    <label for="sbBt"></label>
+                </div>
+
+                <div class="row">
+                    <label for="player2">Player 2 Name: </label>
+                    <input type="text" id="player2" name="player2">
+                </div>
+            </form>
+        </div>
     </div>
-    <div id="container">
-        
+
+
+    <div id="container"> 
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>

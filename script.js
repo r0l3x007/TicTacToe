@@ -13,6 +13,7 @@ emptyBoard = gameboard;
 
 let gameContainer = document.querySelector(`#container`);
 
+
 const drawBoard = (function(){
     for(let row = 0; row < rows; row++){
         for(let column = 0; column < columns; column++){
@@ -22,9 +23,9 @@ const drawBoard = (function(){
             cube.dataset.column = column;
             cube.style.backgroundColor = `green`;
             gameContainer.appendChild(cube);
-           
         }
     } 
+
 })();
 
 
@@ -32,6 +33,7 @@ const drawBoard = (function(){
 //Factory function for creating player object.
 function createPlayer(playerName, playerMarker){
     const playerHolder = {};
+
 
 
     playerHolder.playerName =  playerName;
@@ -49,6 +51,59 @@ function createPlayer(playerName, playerMarker){
 
     return playerHolder;
 }
+
+//handles the eventlisteners for the inputs and creates the players based on  a given logic.
+
+
+let playerSel =(function(){
+
+    let firstPlayer =  document.querySelector(`#player1`);
+    let firstPlayerN;
+
+    let secondPlayer = document.querySelector(`#player2`);
+    let secondPlayerN;
+
+    firstPlayer.addEventListener(`input`, function(){
+        firstPlayerN = firstPlayer.value;
+    })
+
+    secondPlayer.addEventListener(`input`, function(){
+        secondPlayerN = secondPlayer.value;
+    })
+
+    let subInfo = document.querySelector(`#sbBt`);
+    const markerStatus = document.querySelectorAll(`input[type="radio"]`);
+
+    subInfo.addEventListener(`click`, function(event){
+        event.preventDefault();
+        let markerVal;
+
+    for (let marker of markerStatus){
+        if (marker.checked){
+            markerVal = marker.value;
+        }
+        firstPlayerC(markerVal);
+        secondPlayerC(markerVal);
+        }
+    })
+
+
+    function firstPlayerC(markerVal) {
+        if(firstPlayerN != undefined && secondPlayerN != undefined && markerVal != undefined){
+            return player1 = createPlayer(firstPlayerN,markerVal);
+        }
+    }
+
+    function secondPlayerC(markerVal){
+        if(Object.keys(player1).length > 0 && secondPlayerN != undefined && markerVal == `X`){
+            return player2 = createPlayer(secondPlayerN, `0`);
+        } else if(Object.keys(player1).length > 0 && secondPlayerN != undefined && markerVal == `0`){
+            return player2 =  createPlayer(secondPlayerN, `X`);
+        }
+    }
+
+})();
+
 
 
 //Controls the display of the values, and the population of the empty array
@@ -122,9 +177,9 @@ const player1Wins = checkRowWin(`X`) || checkColumnWint(`X`) || checkDiagL(`X`) 
 const player2Wins = checkRowWin(`0`) || checkColumnWint(`0`) || checkDiagL(`0`) || checkDiagR(`0`);
 
 if(player1Wins){
-    console.log(`Player 1 wins`);
+    console.log(`${player1.playerName} Wins`);
 } else if(player2Wins){
-    console.log(`Ai wins`);
+    console.log(`${player2.playerName} Wins`);
 } else{
     console.log(`no winner yet`);
 }
@@ -138,7 +193,7 @@ return{
 }();
 
 
-const player1 = createPlayer(`Person`,`X`);
-const player2 =  createPlayer(`Ai`, `0`);
+//const player1 = createPlayer(`Person`,`X`);
+//const player2 =  createPlayer(`Ai`, `0`);
 
 
