@@ -15,6 +15,7 @@ let gameContainer = document.querySelector(`#container`);
 
 
 const drawBoard = (function(){
+    function drawFinal(){
     for(let row = 0; row < rows; row++){
         for(let column = 0; column < columns; column++){
             let cube = document.createElement(`div`);
@@ -25,6 +26,11 @@ const drawBoard = (function(){
             gameContainer.appendChild(cube);
         }
     } 
+}
+
+return{
+    drawFinal
+}
 
 })();
 
@@ -85,7 +91,11 @@ let playerSel =(function(){
         firstPlayerC(markerVal);
         secondPlayerC(markerVal);
         }
+
+        document.querySelector(`#information`).style.display = `none`;
+        drawBoard.drawFinal();
     })
+
 
 
     function firstPlayerC(markerVal) {
@@ -136,7 +146,6 @@ let displayControll = (function(){
 let gameController = function(){
 
     function checkRowWin(marker){
-
     for(let row = 0; row < 3; row++){
         if(emptyBoard[row][0] == marker && emptyBoard[row][1] == marker && emptyBoard[row][2] == marker){
              return true;
