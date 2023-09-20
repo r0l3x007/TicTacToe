@@ -21,8 +21,11 @@ body{
     height: 100vh;
     display: flex ;
     flex-direction: column;
+    padding:0;
+    margin: 0;
     gap: 75px;
     margin:0;
+    background-color:  #fda403;
 }
 
 header{
@@ -34,7 +37,7 @@ header{
     font-size: 100px;
     font-family: 'Courier New', Courier, monospace;
     overflow: hidden; /* Ensures the content is not revealed until the animation */
-    border-right: .15em solid orange; /* The typwriter cursor */
+    border-right: .15em solid #e8751a; /* The typwriter cursor */
     white-space: nowrap; /* Keeps the content on a single line */
     margin: 0 auto; /* Gives that scrolling effect as the typing happens */
     letter-spacing: .15em; /* Adjust as needed */
@@ -52,10 +55,46 @@ header{
       /* The typewriter cursor effect */
       @keyframes blink-caret {
         from, to { border-color: transparent }
-        50% { border-color: orange; }
+        50% { border-color: #e8751a; }
       }
 
 
-#information{
+
+
+#formcont{
+    align-self: center;
+    height: 600px;
+    width: 600px;
+    background-color: #c51350;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; 
+}
+
+
+.row{
+    display: flex;
+    justify-content: center;
+}
+
+
+.inputGroup{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px;
+    width: 50%;
+}
+
+
+input[type="text"]{
+    border: none;
+    border-radius: 15px;
+    height: 25px;
+    margin:10px;
+}
+
+
+
+.btnCont{
     align-self: center;
 }

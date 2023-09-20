@@ -22,7 +22,7 @@ const drawBoard = (function(){
             cube.classList.add(`cubeIn`);
             cube.dataset.row = row;
             cube.dataset.column = column;
-            cube.style.backgroundColor = `green`;
+            cube.style.backgroundColor = `#c51350`;
             gameContainer.appendChild(cube);
         }
     } 
@@ -92,11 +92,37 @@ let playerSel =(function(){
         secondPlayerC(markerVal);
         }
 
-        document.querySelector(`#information`).style.display = `none`;
+        document.querySelector(`#formcont`).style.display = `none`;
         drawBoard.drawFinal();
+        document.querySelector(`#container`).style.display = `grid`;
     })
 
+    let rstGame = document.querySelector(`#rstBtt`);
 
+    rstGame.addEventListener(`click`,function(event){
+        document.querySelectorAll(`#cubeIn`).textContent = ` `;
+        document.querySelector(`#container`).style.display = `none`;
+        document.querySelector(`#formcont`).style.display = `block`;
+        clearBoard();
+    })
+
+    function clearBoard(){
+        let rows = 3;
+        let cols = 3;
+        let defaultValue =  undefined;
+
+        for(let i = 0; i < rows; i++){
+            for(let j = 0;j < cols; j++){
+                if(emptyBoard[i][j] != undefined || emptyBoard[i][j] == `0`){
+                emptyBoard[i][j] = defaultValue;
+                let changeDisp = document.querySelector(`[data-row = "${i}"][data-column = "${j}"]`);
+                changeDisp.textContent = ` `;
+                }
+            }
+        }
+        player1 = {};
+        player2 = {};
+    }
 
     function firstPlayerC(markerVal) {
         if(firstPlayerN != undefined && secondPlayerN != undefined && markerVal != undefined){
@@ -140,6 +166,7 @@ let displayControll = (function(){
         }
     }
     })
+
 })();
 
 //controls the game flow and declares a winner 

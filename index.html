@@ -11,40 +11,57 @@
     <header>Tic Tac Toe</header>
 
    
-        <div id="information">
-            <form>
+        
+            <form id = "formcont">
                 <div class="row">
-                    <label for ="player1">Player 1 name: </label>
-                    <input type="text" id="player1" name="player1">
+                    <div class="inputGroup">
+                        <label for ="player1">Player 1 name: </label>
+                        <input type="text" id="player1" name="player1">
+                    </div>
                 </div>
-            <p>Choose your Weapon</p>
+
+                <div class="row">
+                    <div class="inputGroup">
+                        <p>Choose your Weapon</p>
+                    </div>
+                </div>
             
                 <div class="row">
-                    <input type="radio" id="X" name="plChoice" value="X">
-                    <label for="X">X</label>
+                    <div class="inputGroup">
+                        <div class="xBtn">
+                            <input type="radio" id="X" name="plChoice" value="X">
+                            <label for="X">X</label>
+                        </div>
+                            <div class="oBtn">
+                            <input type="radio" id="O" name="plChoice" value="0">
+                        <label for="O"> 0 </label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row">
-                    <input type="radio" id="O" name="plChoice" value="0">
-                    <label for="O"> 0 </label>
+                    <div class="inputGroup">
+                        <label for="player2">Player 2 Name: </label>
+                        <input type="text" id="player2" name="player2">
+                    </div>
                 </div>
-
                 <div class="row">
-                    <label for="player2">Player 2 Name: </label>
-                    <input type="text" id="player2" name="player2">
-                </div>
-
-                <div class="row">
-                    <input type="submit" id="sbBt" name="subDeets">
-                    <label for="sbBt"></label>
+                    <div class="sbBtcont">
+                        <input type="submit" id="sbBt" name="subDeets">
+                        <label for="sbBt"></label>
+                    </div>
                 </div>
             </form>
-        </div>
-    
+        
 
 
     <div id="container"> 
     </div>
+<div class="btnCont">
+    <button type="button" id="rstBtt">
+        Reset
+    </button>
+</div>
 
     <script src="script.js"></script>
     <footer></footer>
