@@ -44,6 +44,7 @@ function createPlayer(playerName, playerMarker){
 
     playerHolder.playerName =  playerName;
     playerHolder.playerMarker = playerMarker;
+    playerHolder.playerScore = 0;
 
     if(playerHolder.playerMarker == `X`){
         playerHolder.playerState = 1;
@@ -104,6 +105,22 @@ let playerSel =(function(){
         document.querySelector(`#container`).style.display = `none`;
         document.querySelector(`#formcont`).style.display = `block`;
         clearBoard();
+        player1 = {};
+        player2 = {};
+    })
+
+    let plyAgain =  document.querySelector(`#plyAg`);
+
+    plyAgain.addEventListener(`click`, function(event){
+        document.querySelectorAll(`#cubeIn`).textContent = ` `;
+        clearBoard();
+        if(player1.playerMarker == `X`){
+            player1.playerState = 1;
+            player2.playerState = 0;
+        }else if(player2.playerMarker = `0`){
+            player1.playerState = 0;
+            player2.playerState = 1;
+        }
     })
 
     function clearBoard(){
@@ -120,8 +137,6 @@ let playerSel =(function(){
                 }
             }
         }
-        player1 = {};
-        player2 = {};
     }
 
     function firstPlayerC(markerVal) {
@@ -152,16 +167,16 @@ let displayControll = (function(){
             let changeDisp = document.querySelector(`[data-row = "${row}"][data-column = "${column}"]`);
             //console.log(emptyBoard[row][column]);
         if(emptyBoard[row][column] === ` ` || emptyBoard[row][column] == undefined && player1.playerState == 1){
-            emptyBoard[row][column] = `X`;
+            emptyBoard[row][column] = player1.playerMarker;
             player1[`playerState`] = 0;
             player2[`playerState`] = 1;
-            changeDisp.textContent = `X`;
+            changeDisp.textContent = `${player1.playerMarker}`;
             gameController.checkwinner();
         } else if(emptyBoard[row][column] === ` ` || emptyBoard[row][column] == undefined && player2.playerState == 1){
-            emptyBoard[row][column] = `0`;
+            emptyBoard[row][column] = player2.playerMarker;
             player2[`playerState`] = 0;
             player1[`playerState`] = 1;
-            changeDisp.textContent = `0`;
+            changeDisp.textContent = `${player2.playerMarker}`;
             gameController.checkwinner();
         }
     }
@@ -209,15 +224,21 @@ let gameController = function(){
 
 function checkwinner(){
 
-const player1Wins = checkRowWin(`X`) || checkColumnWint(`X`) || checkDiagL(`X`) || checkDiagR(`X`);
-const player2Wins = checkRowWin(`0`) || checkColumnWint(`0`) || checkDiagL(`0`) || checkDiagR(`0`);
+    let firstMark = player1.playerMarker;
+
+    let secondMark = player2.playerMarker;
+
+    const player1Wins = checkRowWin(firstMark) || checkColumnWint(firstMark) || checkDiagL(firstMark) || checkDiagR(firstMark);
+    const player2Wins = checkRowWin(secondMark) || checkColumnWint(secondMark) || checkDiagL(secondMark) || checkDiagR(secondMark);
 
 if(player1Wins){
     console.log(`${player1.playerName} Wins`);
+    player1.playerScore++;
 } else if(player2Wins){
     console.log(`${player2.playerName} Wins`);
-} else{
-    console.log(`no winner yet`);
+    player2.playerScore++;
+} else if(!player1Wins && !player2Wins){
+    console.log(`It's a draw`);
 }
 
 }
