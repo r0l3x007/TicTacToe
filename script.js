@@ -81,6 +81,8 @@ let playerSel =(function(){
     let subInfo = document.querySelector(`#sbBt`);
     const markerStatus = document.querySelectorAll(`input[type="radio"]`);
 
+    document.querySelector(`#scoreCont`).style.display = `none`;
+
     subInfo.addEventListener(`click`, function(event){
         event.preventDefault();
         let markerVal;
@@ -107,6 +109,7 @@ let playerSel =(function(){
         clearBoard();
         player1 = {};
         player2 = {};
+        displayControll.addingListenere();
     })
 
     let plyAgain =  document.querySelector(`#plyAg`);
@@ -121,6 +124,7 @@ let playerSel =(function(){
             player1.playerState = 0;
             player2.playerState = 1;
         }
+        displayControll.addingListenere();
     })
 
     function clearBoard(){
@@ -160,7 +164,14 @@ let playerSel =(function(){
 //Controls the display of the values, and the population of the empty array
 let displayControll = (function(){
     //event delegation to parent container
-    gameContainer.addEventListener(`click`, function(event){
+
+    function addingListenere(){
+    gameContainer.addEventListener(`click`, clickHandler)
+    }
+
+    let gameWon = false;
+    
+        function clickHandler(event){
         if(event.target.classList.contains(`cubeIn`)){
             let row = event.target.dataset.row;
             let column = event.target.dataset.column;
@@ -171,16 +182,35 @@ let displayControll = (function(){
             player1[`playerState`] = 0;
             player2[`playerState`] = 1;
             changeDisp.textContent = `${player1.playerMarker}`;
-            gameController.checkwinner();
+            if(gameController.checkwinner() == `Win1`){
+                gameWon = true;
+            }
         } else if(emptyBoard[row][column] === ` ` || emptyBoard[row][column] == undefined && player2.playerState == 1){
             emptyBoard[row][column] = player2.playerMarker;
             player2[`playerState`] = 0;
             player1[`playerState`] = 1;
             changeDisp.textContent = `${player2.playerMarker}`;
-            gameController.checkwinner();
+            if(gameController.checkwinner() == `Win2`){
+                gameWon = true;
+            };
         }
+
+        
+
+        if(gameWon == true){
+            gameContainer.removeEventListener(`click`, clickHandler);
+            document.querySelector(`#scoreCont`).style.display = `block`;
+            gameWon = false;
+        }
+    
     }
-    })
+    }
+
+    addingListenere();
+
+    return{
+        addingListenere
+    }
 
 })();
 
@@ -234,9 +264,17 @@ function checkwinner(){
 if(player1Wins){
     console.log(`${player1.playerName} Wins`);
     player1.playerScore++;
+    document.querySelector(`#winnerDecl`).textContent = `Congratulations ${player1.playerName} wins.`;
+    document.querySelector(`#play1Scor`).textContent = `${player1.playerName} score is: ${player1.playerScore}`;
+    document.querySelector(`#play2Scor`).textContent = `${player2.playerName} score is: ${player2.playerScore}`;
+    return `Win1`;
 } else if(player2Wins){
     console.log(`${player2.playerName} Wins`);
     player2.playerScore++;
+    document.querySelector(`#winnerDecl`).textContent = `Congratulations ${player2.playerName} wins.`;
+    document.querySelector(`#play1Scor`).textContent = `${player1.playerName} score is: ${player1.playerScore}`;
+    document.querySelector(`#play2Scor`).textContent = `${player2.playerName} score is: ${player2.playerScore}`;
+    return `Win2`;
 } else if(!player1Wins && !player2Wins){
     console.log(`It's a draw`);
 }
