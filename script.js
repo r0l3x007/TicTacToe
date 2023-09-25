@@ -109,6 +109,10 @@ let playerSel =(function(){
         clearBoard();
         player1 = {};
         player2 = {};
+        document.querySelector(`#winnerDecl`).textContent = ` `;
+        document.querySelector(`#play1Scor`).textContent = ` `;
+        document.querySelector(`#play2Scor`).textContent = ` `;
+        document.querySelector(`#scoreCont`).style.display = `none`;
         displayControll.addingListenere();
     })
 
@@ -124,6 +128,7 @@ let playerSel =(function(){
             player1.playerState = 0;
             player2.playerState = 1;
         }
+        document.querySelector(`#scoreCont`).style.display = `none`;
         displayControll.addingListenere();
     })
 
@@ -194,19 +199,22 @@ let displayControll = (function(){
             if(gameController.checkwinner() == `Win2`){
                 gameWon = true;
             };
-        } else if(gameWon == false){
-            if(gameController.checkwinner() == `Draw`){
-            gameWon = false;
-            gameDraw =  true;
-        }
-        }
+    
     
     }
-    if(gameWon == true){
+}
+
+    if(!gameWon){
+        if(gameController.checkwinner() == `Draw`){
+            gameDraw =  true;
+        }
+    }
+
+    if(gameWon){
         gameContainer.removeEventListener(`click`, clickHandler);
         document.querySelector(`#scoreCont`).style.display = `block`;
         gameWon = false;
-    }else if(gameDraw == true){
+    }else if(gameDraw){
         gameContainer.removeEventListener(`click`, clickHandler);
         document.querySelector(`#scoreCont`).style.display = `block`;
         gameDraw = false;

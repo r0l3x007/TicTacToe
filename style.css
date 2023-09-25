@@ -1,8 +1,8 @@
 #container{
 
     align-self: center;
-    width:600px;
-    height: 600px;
+    min-width:600px;
+    min-height: 600px;
     display: grid;
     gap:5px;;
     grid-template-columns: 1fr 1fr 1fr;
@@ -21,10 +21,7 @@ body{
     height: 100vh;
     display: flex ;
     flex-direction: column;
-    padding:0;
-    margin: 0;
-    gap: 75px;
-    margin:0;
+
     background-color:  #fda403;
 }
 
@@ -63,6 +60,7 @@ header{
 
 #formcont{
     align-self: center;
+    box-sizing: border-box;
     height: 600px;
     width: 600px;
     background-color: #c51350;
