@@ -170,6 +170,7 @@ let displayControll = (function(){
     }
 
     let gameWon = false;
+    let gameDraw = false;
     
         function clickHandler(event){
         if(event.target.classList.contains(`cubeIn`)){
@@ -183,7 +184,7 @@ let displayControll = (function(){
             player2[`playerState`] = 1;
             changeDisp.textContent = `${player1.playerMarker}`;
             if(gameController.checkwinner() == `Win1`){
-                gameWon = true;
+               gameWon = true;
             }
         } else if(emptyBoard[row][column] === ` ` || emptyBoard[row][column] == undefined && player2.playerState == 1){
             emptyBoard[row][column] = player2.playerMarker;
@@ -193,16 +194,22 @@ let displayControll = (function(){
             if(gameController.checkwinner() == `Win2`){
                 gameWon = true;
             };
-        }
-
-        
-
-        if(gameWon == true){
-            gameContainer.removeEventListener(`click`, clickHandler);
-            document.querySelector(`#scoreCont`).style.display = `block`;
+        } else if(gameWon == false){
+            if(gameController.checkwinner() == `Draw`){
             gameWon = false;
+            gameDraw =  true;
+        }
         }
     
+    }
+    if(gameWon == true){
+        gameContainer.removeEventListener(`click`, clickHandler);
+        document.querySelector(`#scoreCont`).style.display = `block`;
+        gameWon = false;
+    }else if(gameDraw == true){
+        gameContainer.removeEventListener(`click`, clickHandler);
+        document.querySelector(`#scoreCont`).style.display = `block`;
+        gameDraw = false;
     }
     }
 
@@ -261,6 +268,20 @@ function checkwinner(){
     const player1Wins = checkRowWin(firstMark) || checkColumnWint(firstMark) || checkDiagL(firstMark) || checkDiagR(firstMark);
     const player2Wins = checkRowWin(secondMark) || checkColumnWint(secondMark) || checkDiagL(secondMark) || checkDiagR(secondMark);
 
+  function isBoardFilled(board){
+    for(let i = 0; i <  board.length; i++){
+        for(let j = 0; j <  board[i].length; j++){
+            if(board[i][j] ==  undefined){
+                return false;
+            }
+        }
+    }
+    return true;
+  }
+
+
+  const isBoardDefined = isBoardFilled(emptyBoard);
+
 if(player1Wins){
     console.log(`${player1.playerName} Wins`);
     player1.playerScore++;
@@ -275,8 +296,12 @@ if(player1Wins){
     document.querySelector(`#play1Scor`).textContent = `${player1.playerName} score is: ${player1.playerScore}`;
     document.querySelector(`#play2Scor`).textContent = `${player2.playerName} score is: ${player2.playerScore}`;
     return `Win2`;
-} else if(!player1Wins && !player2Wins){
-    console.log(`It's a draw`);
+} else if(isBoardDefined && !player1Wins && !player2Wins){
+    console.log(`It's a draw nobody wins`);
+    document.querySelector(`#winnerDecl`).textContent = `It's a draw nobody Wins`;
+    document.querySelector(`#play1Scor`).textContent = `${player1.playerName} score is: ${player1.playerScore}`;
+    document.querySelector(`#play2Scor`).textContent = `${player2.playerName} score is: ${player2.playerScore}`;
+    return `Draw`;
 }
 
 }
