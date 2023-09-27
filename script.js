@@ -107,6 +107,7 @@ let playerSel =(function(){
         document.querySelector(`#container`).style.display = `none`;
         document.querySelector(`#formcont`).style.display = `block`;
         clearBoard();
+        deleteBoard();
         player1 = {};
         player2 = {};
         document.querySelector(`#winnerDecl`).textContent = ` `;
@@ -148,6 +149,12 @@ let playerSel =(function(){
         }
     }
 
+    function deleteBoard(){
+        while(gameContainer.firstChild){
+            gameContainer.removeChild(gameContainer.firstChild)
+        }
+    }
+
     function firstPlayerC(markerVal) {
         if(firstPlayerN != undefined && secondPlayerN != undefined && markerVal != undefined){
             return player1 = createPlayer(firstPlayerN,markerVal);
@@ -169,6 +176,8 @@ let playerSel =(function(){
 //Controls the display of the values, and the population of the empty array
 let displayControll = (function(){
     //event delegation to parent container
+
+    gameContainer.style.display = `none`;
 
     function addingListenere(){
     gameContainer.addEventListener(`click`, clickHandler)

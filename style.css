@@ -1,14 +1,15 @@
 #container{
 
     align-self: center;
-    min-width:600px;
-    min-height: 600px;
+    width:600px;
+    height:600px;
     display: grid;
-    gap:5px;;
+    gap:5px;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; 
 }
+
 
 .cubeIn{
     display: flex;
@@ -21,13 +22,13 @@ body{
     height: 100vh;
     display: flex ;
     flex-direction: column;
-
+    font-family: 'Courier New', Courier, monospace;
     background-color:  #fda403;
 }
 
 header{
     height: 200px;
-    padding-top: 40px;
+    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -60,8 +61,7 @@ header{
 
 #formcont{
     align-self: center;
-    box-sizing: border-box;
-    height: 600px;
+    height: 350px;
     width: 600px;
     background-color: #c51350;
     border-radius: 20px;
@@ -85,22 +85,72 @@ header{
 
 
 input[type="text"]{
+    outline: none;
     border: none;
     border-radius: 15px;
     height: 25px;
     margin:10px;
+    padding-left: 15px;
+}
+
+input[type="text"]:focus{
+    outline: 2px solid #fda403;
 }
 
 
+#sbBt{
+    height: 35px;
+    width: 70px;
+    border:none;
+    border-radius: 20px;
+    background-color: #e8751a;
+    font-size: 1em;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#sbBt:hover{
+    background-color:#fda403;
+}
 
 .btnCont{
     align-self: center;
+    height: 200px;
+    width:  250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+
+#rstBtt{
+    height: 35px;
+    width: 70px;
+    border:none;
+    border-radius: 20px;
+    font-size: 1em;
+    background-color: #c51350;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#plyAg{
+    height: 35px;
+    width: 100px;
+    border:none;
+    border-radius: 20px;
+    font-size: 1em;
+    background-color: #c51350;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#rstBtt:hover, #plyAg:hover{
+    background-color: #d32964;
 }
 
 #scoreCont{
-    align-self:center ;
+    align-self: center;
     width: 200px;
-    height: 200px;
+    height: 100px;
     background-color: #c51350;
     display: flex;
     align-items: center;
@@ -110,4 +160,8 @@ input[type="text"]{
     gap: 1rem;
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; 
+}
+
+#winnerDecl{
+    padding-top: 10px;
 }
