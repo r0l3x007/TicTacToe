@@ -71,7 +71,7 @@ let playerSel =(function(){
     let secondPlayerN;
 
     firstPlayer.addEventListener(`input`, function(){
-        firstPlayerN = firstPlayer.value;
+            firstPlayerN = firstPlayer.value;
     })
 
     secondPlayer.addEventListener(`input`, function(){
@@ -85,20 +85,22 @@ let playerSel =(function(){
 
     subInfo.addEventListener(`click`, function(event){
         event.preventDefault();
+    if(firstPlayer.value != `` && secondPlayer.value != ``){
         let markerVal;
-
-    for (let marker of markerStatus){
+        for (let marker of markerStatus){
         if (marker.checked){
             markerVal = marker.value;
-        }
-        firstPlayerC(markerVal);
-        secondPlayerC(markerVal);
-        }
+            }
+            firstPlayerC(markerVal);
+            secondPlayerC(markerVal);
+            }
 
         document.querySelector(`#formcont`).style.display = `none`;
         drawBoard.drawFinal();
         document.querySelector(`#container`).style.display = `grid`;
-    })
+    }else {
+        alert(`Please enter a name.`)
+    }})
 
     let rstGame = document.querySelector(`#rstBtt`);
 
