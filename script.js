@@ -122,13 +122,13 @@ let playerSel =(function(){
     plyAgain.addEventListener(`click`, function(event){
         document.querySelectorAll(`#cubeIn`).textContent = ` `;
         clearBoard();
-        if(player1.playerMarker == `X`){
+       /* if(player1.playerMarker == `X`){
             player1.playerState = 1;
             player2.playerState = 0;
         }else if(player2.playerMarker = `0`){
             player1.playerState = 0;
             player2.playerState = 1;
-        }
+        }*/
         document.querySelector(`#scoreCont`).style.display = `none`;
         displayControll.addingListenere();
     })
